@@ -19,8 +19,6 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'w0rp/ale'
 
 
-
-
 call plug#end()
 
 colorscheme moonfly
@@ -94,3 +92,23 @@ call gina#custom#mapping#nmap(
       \ ':<C-u>Gina status<CR>',
       \ {'noremap': 1, 'silent': 1},
       \)
+" Execute :ThisBranch with <leader>tb in the commit buffer
+call gina#custom#mapping#nmap(
+            \ 'commit', '<leader>b',
+            \ ':<C-u>ThisBranch<cr>i',
+            \ {'noremap': 1, 'silent': 1},
+            \ )
+" Gina opener, with vsplit
+call gina#custom#command#option(
+            \ '/\%(status\|commit\|branch\|changes\|grep\|log\)',
+            \ '--opener', 'vsplit'
+            \ )
+
+" ale
+let g:ale_lint_on_text_changed = 1
+let g:ale_fixers = {
+            \ 'python': ['yapf']
+            \ }
+nnoremap <F8> <Plug>(ale-fix)
+let g:ale_linters = {'python': ['pylint']}
+
