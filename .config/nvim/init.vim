@@ -78,7 +78,7 @@ nmap <F2> :NERDTreeFind<cr>
 
 " gina
 nnoremap <leader>gs :Gina status<cr>
-nnoremap <leader>gsh :Gina push<cr>
+nnoremap <leader>gsh :call GinaHelperPush()<cr>
 nnoremap <leader>gsha :Gina push --all<cr>
 nnoremap <leader>gc :Gina commit<cr>
 call gina#custom#mapping#nmap(
