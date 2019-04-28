@@ -9,7 +9,8 @@ Plug 'airblade/vim-gitgutter'
 Plug 'lambdalisue/gina.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'mattn/emmet-vim'
-Plug 'bluz71/vim-moonfly-colors'
+Plug 'liuchengxu/space-vim-dark'
+
 Plug 'itchyny/lightline.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -18,10 +19,22 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tmhedberg/SimpylFold'
 Plug 'w0rp/ale'
 
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'ervandew/supertab'
+Plug 'majutsushi/tagbar'
+Plug 'metakirby5/codi.vim'
+
 
 call plug#end()
 
-colorscheme moonfly
+colorscheme space-vim-dark
+hi Comment guifg=#5C6370 ctermfg=59
+hi Normal     ctermbg=NONE guibg=NONE
+hi LineNr     ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
+hi Comment cterm=italic
+
 
 let mapleader = ','
 nnoremap <C-J> <C-W><C-J>
@@ -63,10 +76,12 @@ au FileType python map <silent> <leader>b Oimport pdb; pdb.set_trace()<esc>
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('max_list', 15)
 
 " jedi
 " disable autocompletion, cause we use deoplete for completion
-let g:jedi#completions_enabled = 0
+let g:jedi#completions_enabled = 1
+let g:jedi#use_splits_not_buffers = 'bottom'
 
 " open the go-to function in split, not another buffer
 let g:jedi#use_splits_not_buffers = "right"
@@ -106,9 +121,30 @@ call gina#custom#command#option(
 
 " ale
 let g:ale_lint_on_text_changed = 1
-let g:ale_fixers = {
-            \ 'python': ['yapf']
-            \ }
-nnoremap <F8> <Plug>(ale-fix)
+nmap <F8> <Plug>(ale_fix)
 let g:ale_linters = {'python': ['pylint']}
+let g:airline#extensions#ale#enabled = 1
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_fixers = {'javascript': ['prettier'], 'scss': ['stylelint'], 'python': ['yapf', 'isort']}
+let g:ale_set_highlights = 1
+let g:ale_set_signs = 1
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
 
+" ultisnips
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+let g:UltiSnipsExpandTrigger="<nop>"
+let g:ulti_expand_or_jump_res = 0
+function! <SID>ExpandSnippetOrReturn()
+  let snippet = UltiSnips#ExpandSnippetOrJump()
+  if g:ulti_expand_or_jump_res > 0
+    return snippet
+  else
+    return "\<CR>"
+  endif
+endfunction
+inoremap <expr> <CR> pumvisible() ? "<C-R>=<SID>ExpandSnippetOrReturn()<CR>" : "\<CR>"
