@@ -98,13 +98,13 @@ nnoremap <leader>gsha :Gina push --all<cr>
 nnoremap <leader>gc :Gina commit<cr>
 call gina#custom#mapping#nmap(
             \ 'status', '<c-^>',
-            \ ':<C-u>Gina commit<cr>',
+            \ ':<C-u>q<cr>:Gina commit<cr>',
             \ {'noremap': 1, 'silent': 1}
             \ )
 " Execute :Gina status with <C-^> on "gina-commit" buffer
 call gina#custom#mapping#nmap(
       \ 'commit', '<C-^>',
-      \ ':<C-u>Gina status<CR>',
+      \ ':<C-u>q<cr>:Gina status<CR>',
       \ {'noremap': 1, 'silent': 1},
       \)
 " Execute :ThisBranch with <leader>tb in the commit buffer
