@@ -135,3 +135,5 @@ export EDITOR="/usr/bin/nvim"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+[[ -s /home/ihfazh/.autojump/etc/profile.d/autojump.sh ]] && source /home/ihfazh/.autojump/etc/profile.d/autojump.sh
+

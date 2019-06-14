@@ -25,15 +25,20 @@ Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
 Plug 'metakirby5/codi.vim'
 
+Plug 'cormacrelf/vim-colors-github'
+
+
 
 call plug#end()
 
-colorscheme space-vim-dark
-hi Comment guifg=#5C6370 ctermfg=59
-hi Normal     ctermbg=NONE guibg=NONE
-hi LineNr     ctermbg=NONE guibg=NONE
-hi SignColumn ctermbg=NONE guibg=NONE
-hi Comment cterm=italic
+colorscheme github
+let g:github_colors_soft = 1
+
+" hi Comment guifg=#5C6370 ctermfg=59
+" hi Normal     ctermbg=NONE guibg=NONE
+" hi LineNr     ctermbg=NONE guibg=NONE
+" hi SignColumn ctermbg=NONE guibg=NONE
+" hi Comment cterm=italic
 
 
 let mapleader = ','
